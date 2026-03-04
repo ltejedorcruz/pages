@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Práctica 2.8 - Carousel</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+  <style>
+    body{
+      background-color: #0b1320;
+      color: #e8eefc;
+    }
+
+    .panel{
+      background-color: #111b2e;
+      border: 1px solid #26324a;
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .carousel-item img{
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+    }
+
+    .carousel-caption{
+      background: rgba(0,0,0,0.45);
+      border-radius: 12px;
+      padding: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="py-4">
+    <div class="container">
+      <h1 class="text-center mb-2">Los sueños de Lucía Tejedor</h1>
+    </div>
+  </header>
+
+  <main class="container mb-5">
+    <div class="panel">
+      <div id="miCarrusel" class="carousel slide" data-bs-ride="carousel">
+
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#miCarrusel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Foto 1"></button>
+          <button type="button" data-bs-target="#miCarrusel" data-bs-slide-to="1" aria-label="Foto 2"></button>
+          <button type="button" data-bs-target="#miCarrusel" data-bs-slide-to="2" aria-label="Foto 3"></button>
+          <button type="button" data-bs-target="#miCarrusel" data-bs-slide-to="3" aria-label="Foto 4"></button>
+          <button type="button" data-bs-target="#miCarrusel" data-bs-slide-to="4" aria-label="Foto 5"></button>
+        </div>
+
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="images/pixar_graduada.png" alt="Graduada">
+            <div class="carousel-caption d-none d-md-block">
+              <h2 class="h5 mb-1">Ser ingeniera en telecomunicaciones</h2>
+              <p class="mb-0">¡Primer objetivo conseguido! Después de tanto sufrimiento...</p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <img src="images/pixar_boda.png" alt="Casada">
+            <div class="carousel-caption d-none d-md-block">
+              <h2 class="h5 mb-1">Encontrar al amor de su vida</h2>
+              <p class="mb-0">Compartir proyectos, risas y retos con alguien que camine a su lado en cada etapa.</p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <img src="images/pixar_perro.png" alt="Perro">
+            <div class="carousel-caption d-none d-md-block">
+              <h2 class="h5 mb-1">Tener su primer perrito</h2>
+              <p class="mb-0">Un compañero fiel para paseos, tardes tranquilas y momentos de desconexión.</p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <img src="images/pixar_familia.png" alt="Familia">
+            <div class="carousel-caption d-none d-md-block">
+              <h2 class="h5 mb-1">Tener una familia</h2>
+              <p class="mb-0">Construir un hogar lleno de cariño, estabilidad y nuevos sueños compartidos.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="images/pixar_abuelos.png" alt="Abuelos">
+            <div class="carousel-caption d-none d-md-block">
+              <h2 class="h5 mb-1">Envejecer juntos</h2>
+              <p class="mb-0">Seguir compartiendo miradas cómplices, recuerdos y nuevos amaneceres, incluso con el paso del tiempo.</p>
+            </div>
+          </div>          
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#miCarrusel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#miCarrusel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+        </button>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>
