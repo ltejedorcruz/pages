@@ -10,10 +10,43 @@
   --accent2: #22c55e;
   --accent3: #f59e0b;
 }
+/* Scroll suave para toda la página */
+html {
+  scroll-behavior: smooth;
+}
+/* --- BARRA DE DESPLAZAMIENTO PERSONALIZADA --- */
+
+/* Soporte para Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) var(--bg-alt);
+}
+
+/* Soporte para Chrome, Edge y Safari */
+::-webkit-scrollbar {
+  width: 12px; /* Ancho de la barra vertical */
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--bg-alt);
+  border-left: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--line);
+  border-radius: 10px; 
+  border: 3px solid var(--bg-alt);
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--accent); 
+}
 
 body{
   background-color: var(--bg);
   color: var(--txt);
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 a{
@@ -24,17 +57,99 @@ a:hover{
   color: #ffffff;
 }
 
-.nav-custom{
-  background-color: rgba(15, 23, 42, 0.95);
-  border-bottom: 1px solid var(--line);
+.nav-custom {
+  background-color: rgba(15, 23, 42, 0.7); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  /*position: sticky;*/
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
 }
 
-.hero{
+.navbar-nav .nav-link {
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  position: relative;
+  transition: color 0.3s ease;
+  padding: 0.5rem 1rem;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: var(--accent); 
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 80%;
+}
+
+/* Indicador de página activa en el menú */
+.navbar-nav .nav-link.active {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Mantiene la línea rosa subrayada permanentemente en la página actual */
+.navbar-nav .nav-link.active::after {
+  width: 80%;
+}
+/* --- FONDO DE PARTÍCULAS Y DEGRADADO --- */
+
+.hero {
+  position: relative; 
+  overflow: hidden;
   padding: 72px 0;
   background-color: var(--bg);
+  /* ¡Recuperamos tu degradado original aquí! */
   background-image:
     radial-gradient(900px 420px at 10% 10%, #ed3a7c, rgba(0,0,0,0)),
     radial-gradient(900px 420px at 90% 20%, rgba(34,197,94,0.16), rgba(0,0,0,0));
+}
+
+/* Reducimos el tamaño para que no sea tan gigante */
+#inicio.hero {
+  min-height: 60vh; /* Antes estaba en 80vh */
+  display: flex;
+  align-items: center;
+}
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0; 
+  background: transparent; 
+
+.hero-content-wrapper {
+  position: relative;
+  z-index: 1; 
+  width: 100%;
+}
+
+/* Animación de la foto de perfil */
+.hero img.rounded-circle {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero img.rounded-circle:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(237, 58, 124, 0.2);
 }
 
 .hero-img{
@@ -67,71 +182,135 @@ h2{
   box-shadow: 0 10px 28px rgba(0,0,0,0.25);
 }
 
-.card-custom{
+.card-custom {
   background-color: var(--panel);
   border: 1px solid var(--line);
   border-radius: 16px;
   overflow: hidden;
   color: var(--txt);
   box-shadow: 0 10px 28px rgba(0,0,0,0.25);
-}
-
-.card-custom{
   border-top: 4px solid rgba(34,197,94,0.55);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-top-color 0.3s ease !important; 
 }
 
-.card-custom .card-img-top{
+/* El efecto al pasar el ratón por cualquier tarjeta */
+.card-custom:hover {
+  transform: translateY(-8px) !important; 
+  box-shadow: 0 18px 40px rgba(0,0,0,0.4) !important; 
+  border-top-color: rgba(34,197,94,0.9) !important; 
+}
+
+.card-custom .card-img-top {
   height: 170px;
   object-fit: cover;
   filter: saturate(1.05) contrast(1.03);
+  transition: transform 0.5s ease;
+}
+
+.card-custom:hover .card-img-top {
+  transform: scale(1.05);
 }
 
 .card-custom .card-body{
   border-top: 1px solid rgba(255,255,255,0.06);
 }
 
-.btn-primary{
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
   background-color: #ed3a7c;
   border: 1px solid rgba(255,255,255,0.12);
   box-shadow: 0 10px 22px rgba(0,0,0,0.25);
+  color: white;
 }
 
-.btn-primary:hover{
-  background-color: #ed3a7c;
+.btn-primary:hover {
+  background-color: #f74d8c; 
+  transform: translateY(-2px); 
+  box-shadow: 0 15px 25px rgba(237, 58, 124, 0.4);
+  color: white;
 }
 
-.btn-outline-light{
+.btn-outline-light {
   border-color: rgba(255,255,255,0.35);
+  color: var(--txt);
 }
 
-.form-control{
-  background-color: #0b162b;
+.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.1); 
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  color: white;
+}
+
+.form-control {
+  background-color: rgba(11, 22, 43, 0.6); 
   border: 1px solid var(--line);
   color: var(--txt);
+  border-radius: 8px; 
+  padding: 0.75rem 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.form-control:focus{
+.form-control:focus {
   background-color: #0b162b;
-  border-color: #ed3a7c;
+  border-color: var(--accent);
   color: var(--txt);
+  box-shadow: 0 0 0 4px rgba(237, 58, 124, 0.15); 
+  outline: none;
 }
 
-.form-label{
-  color: var(--txt);
+.form-label {
+  color: var(--muted);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
 }
 
-.footer-custom{
+button[type="reset"].btn-secondary {
+  background-color: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+
+button[type="reset"].btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--txt);
+  border-color: var(--muted);
+  transform: translateY(-2px);
+}
+
+.footer-custom {
   background-color: var(--bg-alt);
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 2rem 0; 
+  margin-top: 4rem;
 }
 
-.badge-soft{
+.footer-custom p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.badge-soft {
   background-color: rgba(245,158,11,0.15);
   border: 1px solid rgba(245,158,11,0.35);
   color: #ffd18a;
   border-radius: 999px;
   padding: 6px 10px;
+  display: inline-block;
+  transition: all 0.3s ease;
 }
+
+.badge-soft:hover {
+  background-color: rgba(245,158,11,0.3);
+  border-color: rgba(245,158,11,0.6);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
 .carousel-control-prev,
 .carousel-control-next{
   width: 8%;
@@ -142,4 +321,150 @@ h2{
   background-color: rgba(0,0,0,0.4);
   border-radius: 50%;
   padding: 14px;
+}
+/* --- BOTÓN FLOTANTE VOLVER ARRIBA --- */
+.btn-subir {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: var(--accent);
+  color: #ffffff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(237, 58, 124, 0.4);
+  cursor: pointer;
+  opacity: 0; 
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-subir.mostrar {
+  opacity: 1;
+  visibility: visible;
+}
+
+.btn-subir:hover {
+  background-color: #f74d8c;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(237, 58, 124, 0.6);
+}
+
+/* --- SECCIÓN DE CONTACTO --- */
+
+/* Diseño de las tarjetas de contacto (Email, GitHub, LinkedIn) */
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+  background-color: rgba(237, 58, 124, 0.05); 
+  border-color: var(--accent); 
+  transform: translateX(5px);
+
+/* El círculo que rodea al icono */
+.contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  color: var(--accent);
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.contact-card:hover .contact-icon {
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+/* Textos dentro de la tarjeta de contacto */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-title {
+  color: var(--txt);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.contact-detail {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* =======================================================
+   DISEÑO RESPONSIVO (MÓVILES Y TABLETS Pequeñas)
+   ======================================================= */
+@media (max-width: 768px) {
+  
+  /* 1. Ajustes del encabezado (Hero) para móviles */
+  .hero .display-5 {
+    font-size: 2.2rem; 
+    text-align: center;
+  }
+
+  .hero .lead {
+    text-align: center;
+    font-size: 1.1rem;
+  }
+
+  #inicio .d-flex.gap-2 {
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .hero img.rounded-circle {
+    max-width: 260px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  /* 2. Solución para el menú hamburguesa sobre las partículas */
+  .navbar-collapse {
+    background-color: var(--panel); 
+    padding: 1rem;
+    border-radius: 12px;
+    margin-top: 15px;
+    border: 1px solid var(--line);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  }
+
+  /* 3. Reducir los espacios en blanco gigantes */
+  .section {
+    padding: 40px 0;
+  }
+
+  /* 4. Botón de volver arriba más discreto */
+  .btn-subir {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+  .navbar-nav .nav-item {
+    /* Fuerza a que el contenedor solo mida lo que ocupa la palabra */
+    width: fit-content; 
+  }
 }
