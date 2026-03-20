@@ -11,6 +11,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
           crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/landing.css">
 </head>
@@ -29,8 +32,9 @@
 
       <div id="menu" class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="landing.html#inicio">Incio</a></li>
-          <li class="nav-item"><a class="nav-link" href="landing.html#sobre-mi">Sobre mí</a></li>
+          <li class="nav-item"><a class="nav-link" href="landing.html#inicio">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sobre-mi">Sobre mí</a></li>
+          <li class="nav-item"><a class="nav-link active" href="proyectos.html">Proyectos</a></li>
           <li class="nav-item"><a class="nav-link" href="habilidades.html">Habilidades</a></li>
           <li class="nav-item"><a class="nav-link" href="cv_landing.html">CV</a></li>
           <li class="nav-item"><a class="nav-link" href="landing.html#contacto">Contacto</a></li>
@@ -40,7 +44,8 @@
   </nav>
 
   <header class="hero">
-    <div class="container">
+    <div id="particles-js"></div>
+    <div class="container hero-content-wrapper">
       <h1 class="display-6 fw-bold mb-2">Proyectos</h1>
       <p class="lead mb-0">Selección ampliada de trabajos y prácticas.</p>
     </div>
@@ -461,11 +466,116 @@
     </div>
   </main>
 
+  <button id="btn-subir" class="btn-subir" title="Volver arriba">
+    ↑
+  </button>
+
   <footer class="py-4 footer-custom">
     <div class="container text-center">
       <p class="mb-0">© 2026 · Lucía Tejedor · Portfolio</p>
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+  <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 70, // Cantidad de nodos
+          "density": { "enable": true, "value_area": 800 }
+        },
+        "color": { "value": ["#ed3a7c", "#22c55e", "#b8c7f0"] },
+        "shape": { "type": "circle" },
+        "opacity": {
+          "value": 0.5,
+          "random": false
+        },
+        "size": {
+          "value": 3,
+          "random": true
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#b8c7f0",
+          "opacity": 0.2,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 2,
+          "direction": "none",
+          "random": false,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "grab"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "grab": { "distance": 140, "line_linked": { "opacity": 0.8 } },
+          "push": { "particles_nb": 4 }
+        }
+      },
+      "retina_detect": true
+    });
+  </script>
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+
+  <script>
+    const sr = ScrollReveal({
+      distance: '60px',
+      duration: 1000,   // Duración de la animación en milisegundos
+      delay: 200,       // Retraso antes de empezar
+      reset: false      // 'true', la animación se repite al subir y bajar. En 'false' solo se anima la primera vez.
+    });
+    
+    // Títulos: Aparecen desde la izquierda
+    sr.reveal('h2', { origin: 'left', delay: 150 });
+    
+    // Paneles de texto: Aparecen desde abajo
+    sr.reveal('.panel', { origin: 'bottom', delay: 300 });
+    
+    // Tarjetas (Proyectos, Habilidades): Aparecen en cascada una tras otra
+    sr.reveal('.card-custom', { origin: 'bottom', interval: 200 });
+    
+    // Imagen de perfil en el sobre mí: Aparece desde la derecha
+    sr.reveal('.hero img', { origin: 'right', delay: 400 });
+  </script>
+  
+  <script>
+    const btnSubir = document.getElementById("btn-subir");
+
+    // Mostrar u ocultar el botón al hacer scroll
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) { // Si baja 300 píxeles, aparece
+        btnSubir.classList.add("mostrar");
+      } else {
+        btnSubir.classList.remove("mostrar");
+      }
+    });
+
+    // Volver arriba de forma suave al hacer clic
+    btnSubir.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  </script>
 </body>
 </html>
