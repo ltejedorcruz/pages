@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CV - Lucía Tejedor</title>
+  <link rel="icon" type="image/png" href="images/favicon.png">
 
   <meta property="og:title" content="Currículum - Lucía Tejedor de la Cruz">
   <meta property="og:description" content="Ingeniera de Telecomunicaciones. Conoce mi formación, experiencia y proyectos técnicos.">
@@ -28,6 +29,7 @@
 </head>
 
 <body>
+  <div id="mouse-glow"></div>
   <nav class="navbar navbar-expand-lg navbar-dark nav-custom">
     <div class="container">
       <a class="navbar-brand" href="landing.html#inicio">
@@ -51,7 +53,7 @@
 
   <header class="hero">
     <div id="particles-js"></div>
-    <div class="container hero-content-wrapper text-center">
+    <div class="container hero-content-wrapper">
       <h1 class="display-6 fw-bold mb-2">Currículum Vitae</h1>
       <p class="lead mb-0">Mi trayectoria académica y profesional al detalle.</p>
     </div>
@@ -255,6 +257,35 @@
     btnSubir.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
+  </script>
+
+  <script>
+    // Lógica para que el resplandor siga al cursor
+    const glow = document.getElementById('mouse-glow');
+    
+    window.addEventListener('mousemove', (e) => {
+      // Actualizamos la posición usando las coordenadas del ratón (clientX/Y)
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+    });
+
+    document.addEventListener('mouseleave', () => {
+      glow.style.opacity = '0';
+    });
+    document.addEventListener('mouseenter', () => {
+      glow.style.opacity = '1';
+    });
+  </script>
+  <script>
+    // Mensaje oculto para mentes curiosas
+    console.log(
+      "%c¡Hola, reclutador curioso! 😉 ",
+      "color: #ed3a7c; font-size: 22px; font-weight: bold; font-family: 'Space Grotesk', sans-serif;"
+    );
+    console.log(
+      "%cVeo que estás revisando el código. He programado este portfolio con mucho mimo. Si buscas una ingeniera con atención al detalle y pasión por las redes y la IA, ¡hablemos!",
+      "color: #b8c7f0; font-size: 14px; font-family: 'Space Grotesk', sans-serif;"
+    );
   </script>
 </body>
 </html>
