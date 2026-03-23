@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Landing - Lucía Tejedor de la Cruz</title>
+  <link rel="icon" type="image/png" href="images/favicon.png">
 
   <meta property="og:title" content="Lucía Tejedor de la Cruz - Portfolio">
   <meta property="og:description" content="Ingeniera de Telecomunicaciones. Proyectos sobre IoT, Redes, Inteligencia Artificial y desarrollo de software.">
@@ -32,6 +33,8 @@
 </head>
 
 <body>
+  <div id="mouse-glow"></div>
+
   <nav class="navbar navbar-expand-lg navbar-dark nav-custom">
     <div class="container">
       <a class="navbar-brand" href="landing.html">
@@ -63,7 +66,7 @@
         <div class="row align-items-center">
           <div class="col-12 col-lg-7">
             <h1 class="display-5 fw-bold mb-2">Lucía Tejedor de la Cruz</h1>
-            <p class="lead mb-4">Ingeniería de Telecomunicaciones · IoT · Redes · IA</p>
+            <p id="typewriter" class="lead mb-4"></p>
 
             <div class="d-flex gap-2">
               <a class="btn btn-primary" href="proyectos.html">Ver proyectos</a>
@@ -365,7 +368,7 @@
             <p class="mb-4" style="color: var(--muted);">¿Tienes alguna propuesta, duda o simplemente quieres saludar? Tienes mis buzones abiertos.</p>
             
             <div class="d-flex flex-column gap-3">
-              <a href="mailto:lucia.tejedor.cruz@gmail.com" class="contact-card">
+              <div class="contact-card" onclick="copiarEmail(event, this)" style="cursor: pointer;">
                 <div class="contact-icon">
                   <i class="bi bi-envelope-at-fill"></i>
                 </div>
@@ -373,6 +376,7 @@
                   <span class="contact-title">Email</span>
                   <span class="contact-detail">lucia.tejedor.cruz@gmail.com</span>
                 </div>
+              </div>
               </a>
 
               <a href="https://www.linkedin.com/in/luc%C3%ADa-tejedor-de-la-cruz-9b837437a/" target="_blank" class="contact-card">
@@ -401,23 +405,22 @@
         <div class="col-12 col-lg-7">
           <div class="panel h-100">
             <h3 class="h5 mb-4">Envíame un mensaje</h3>
-
-            <form action="gracias.html" method="get">
+            <form id="form-contacto">
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <label for="nombre" class="form-label">Nombre</label>
-                  <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Tu nombre" required>
+                  <input id="nombre" type="text" class="form-control" placeholder="Tu nombre" required>
                 </div>
 
                 <div class="col-md-6 mb-3">
                   <label for="correo" class="form-label">Correo electrónico</label>
-                  <input id="correo" name="correo" type="email" class="form-control" placeholder="tu@email.com" required>
+                  <input id="correo" type="email" class="form-control" placeholder="tu@email.com" required>
                 </div>
               </div>
 
               <div class="mb-4">
                 <label for="mensaje" class="form-label">Mensaje</label>
-                <textarea id="mensaje" name="mensaje" class="form-control" rows="5" placeholder="¿En qué te puedo ayudar?" required></textarea>
+                <textarea id="mensaje" class="form-control" rows="5" placeholder="¿En qué te puedo ayudar?" required></textarea>
               </div>
 
               <div class="d-flex gap-3">
@@ -547,5 +550,129 @@
       });
     });
   </script>
-</body>
+  
+    <script>
+      document.getElementById('form-contacto').addEventListener('submit', function(e) {
+        e.preventDefault(); // Evita que la página se recargue
+
+        const token = "8552936933:AAH7gBcA2hrbQy9YXVaI_sSjqlJnWkz3eMk";
+        const chatId = "1130613396";
+        
+        // Capturamos los datos del formulario
+        const nombre = document.getElementById('nombre').value;
+        const email = document.getElementById('correo').value;
+        const mensaje = document.getElementById('mensaje').value;
+
+        // Construimos el texto que me llegará a Telegram
+        const texto = `🚀 ¡Nuevo mensaje del Portfolio!\n\n` +
+                      `👤 Nombre: ${nombre}\n` +
+                      `📧 Email: ${email}\n` +
+                      `💬 Mensaje: ${mensaje}`;
+
+        // Enviamos la petición a la API de Telegram mediante fetch
+        const url = `https://api.telegram.org/bot${token}/sendMessage`;
+        
+        fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: texto
+          })
+        })
+        .then(response => {
+          if (response.ok) {
+            // Si todo va bien, redireccionamos a tu página de gracias
+            window.location.href = "gracias.html";
+          } else {
+            alert("Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.");
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert("No se pudo conectar con el servicio de mensajería.");
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const texto = "Ingeniería de Telecomunicaciones · IoT · Redes · IA";
+        const elemento = document.getElementById("typewriter");
+        let i = 0;
+
+        function escribir() {
+          if (i < texto.length) {
+            elemento.innerHTML += texto.charAt(i);
+            i++;
+            setTimeout(escribir, 50); // Velocidad de escritura (50ms por letra)
+          }
+        }
+
+        // Iniciamos la animación
+        escribir();
+      });
+    </script>
+    <script>
+      // Lógica para que el resplandor siga al cursor
+      const glow = document.getElementById('mouse-glow');
+      
+      window.addEventListener('mousemove', (e) => {
+        // Actualizamos la posición usando las coordenadas del ratón (clientX/Y)
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+      });
+
+      document.addEventListener('mouseleave', () => {
+        glow.style.opacity = '0';
+      });
+      document.addEventListener('mouseenter', () => {
+        glow.style.opacity = '1';
+      });
+    </script>
+    <script>
+      function copiarEmail(event, elemento) {
+        const email = "lucia.tejedor.cruz@gmail.com";
+        
+        // Copiar al portapapeles
+        navigator.clipboard.writeText(email);
+
+        // Crear la notificación
+        const aviso = document.createElement('div');
+        aviso.className = 'copy-notification';
+        aviso.innerHTML = '<i class="bi bi-check-lg"></i> ¡Email copiado al portapapeles!';
+        
+        // Posicionamiento centrado sobre la tarjeta
+        const rect = elemento.getBoundingClientRect();
+        aviso.style.left = `${rect.left + (rect.width / 2)}px`;
+        aviso.style.top = `${rect.top + window.scrollY}px`;
+
+        document.body.appendChild(aviso);
+
+        // Efecto visual temporal en la tarjeta
+        elemento.style.borderColor = "#f74d8c";
+        const icono = elemento.querySelector('.contact-icon i');
+        const claseOriginal = icono.className;
+        icono.className = 'bi bi-check-lg text-primary';
+
+        // Limpiar después de la animación
+        setTimeout(() => {
+          aviso.remove();
+          elemento.style.borderColor = "";
+          icono.className = claseOriginal;
+        }, 1200);
+      }
+    </script>
+    <script>
+      // Mensaje oculto para mentes curiosas
+      console.log(
+        "%c¡Hola, reclutador curioso! 😉 ",
+        "color: #ed3a7c; font-size: 22px; font-weight: bold; font-family: 'Space Grotesk', sans-serif;"
+      );
+      console.log(
+        "%cVeo que estás revisando el código. He programado este portfolio con mucho mimo. Si buscas una ingeniera con atención al detalle y pasión por las redes y la IA, ¡hablemos!",
+        "color: #b8c7f0; font-size: 14px; font-family: 'Space Grotesk', sans-serif;"
+      );
+    </script>
+  </body>
 </html>
+
