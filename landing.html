@@ -550,50 +550,30 @@
       });
     });
   </script>
-  
-    <script>
-      document.getElementById('form-contacto').addEventListener('submit', function(e) {
-        e.preventDefault(); // Evita que la página se recargue
+  <script>
+  document.getElementById('form-contacto').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-        const token = "8552936933:AAH7gBcA2hrbQy9YXVaI_sSjqlJnWkz3eMk";
-        const chatId = "1130613396";
-        
-        // Capturamos los datos del formulario
-        const nombre = document.getElementById('nombre').value;
-        const email = document.getElementById('correo').value;
-        const mensaje = document.getElementById('mensaje').value;
+    const nombre = document.getElementById('nombre').value;
+    const email = document.getElementById('correo').value;
+    const mensaje = document.getElementById('mensaje').value;
 
-        // Construimos el texto que me llegará a Telegram
-        const texto = `🚀 ¡Nuevo mensaje del Portfolio!\n\n` +
-                      `👤 Nombre: ${nombre}\n` +
-                      `📧 Email: ${email}\n` +
-                      `💬 Mensaje: ${mensaje}`;
-
-        // Enviamos la petición a la API de Telegram mediante fetch
-        const url = `https://api.telegram.org/bot${token}/sendMessage`;
-        
-        fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chat_id: chatId,
-            text: texto
-          })
-        })
-        .then(response => {
-          if (response.ok) {
-            // Si todo va bien, redireccionamos a tu página de gracias
-            window.location.href = "gracias.html";
-          } else {
-            alert("Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.");
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert("No se pudo conectar con el servicio de mensajería.");
-        });
-      });
-    </script>
+    fetch('/.netlify/functions/enviar', {
+      method: 'POST',
+      body: JSON.stringify({ nombre, email, mensaje })
+    })
+    .then(response => {
+      if (response.ok) {
+        window.location.href = "gracias.html";
+      } else {
+        alert("Hubo un error. Por favor, inténtalo de nuevo.");
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  });
+</script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const texto = "Ingeniería de Telecomunicaciones · IoT · Redes · IA";
